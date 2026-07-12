@@ -56,7 +56,7 @@ export default function TasksPage() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <div className="flex gap-1 bg-slate-800 border border-slate-700 rounded-lg p-1">
+        <div className="flex gap-1 bg-slate-800 border border-slate-700 rounded-lg p-1 overflow-x-auto">
           {STATUS_TABS.map((tab) => (
             <button
               key={tab.value}

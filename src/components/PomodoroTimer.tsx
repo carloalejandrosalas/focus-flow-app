@@ -60,7 +60,7 @@ export default function PomodoroTimer({
   return (
     <div className="flex flex-col items-center gap-6">
       {/* Phase indicator */}
-      <div className="flex gap-2 text-sm">
+      <div className="flex flex-wrap justify-center gap-2 text-sm">
         {(["work", "short-break", "long-break"] as PomodoroPhase[]).map((p) => (
           <span
             key={p}
@@ -75,7 +75,12 @@ export default function PomodoroTimer({
 
       {/* Circular timer */}
       <div className="relative flex items-center justify-center">
-        <svg width="220" height="220" className="-rotate-90">
+        <svg
+          width="200"
+          height="200"
+          viewBox="0 0 220 220"
+          className="-rotate-90 w-[180px] h-[180px] sm:w-[220px] sm:h-[220px]"
+        >
           <circle
             cx="110"
             cy="110"

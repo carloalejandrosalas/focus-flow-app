@@ -81,7 +81,7 @@ export default function TimerPage() {
       />
 
       {/* Timer display */}
-      <div className="bg-slate-800 border border-slate-700 rounded-2xl p-8">
+      <div className="bg-slate-800 border border-slate-700 rounded-2xl p-4 sm:p-8">
         {method === "pomodoro" ? (
           <PomodoroTimer
             remaining={timer.remaining}

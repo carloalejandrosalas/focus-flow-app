@@ -67,6 +67,11 @@ export default function TaskCard({
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
+            {isSelected && (
+              <span className="text-xs px-2 py-0.5 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-400 font-medium">
+                Active
+              </span>
+            )}
             <span
               className={`text-xs px-2 py-0.5 rounded-full border font-medium capitalize ${PRIORITY_STYLES[task.priority]}`}
             >
@@ -98,12 +103,6 @@ export default function TaskCard({
           )}
         </div>
       </div>
-
-      {isSelected && (
-        <div className="absolute top-2 right-10 text-xs text-indigo-400 font-medium">
-          Active
-        </div>
-      )}
     </div>
   );
 }

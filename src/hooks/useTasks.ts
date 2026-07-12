@@ -63,12 +63,23 @@ export function useTaskDetail(id: string | undefined) {
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
-    if (!id) return;
+    if (!id) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
-    const [t, s] = await Promise.all([fetchTask(id), fetchSessionsForTask(id)]);
-    setTask(t);
-    setSessions(s);
-    setLoading(false);
+    try {
+      const [taskResult, sessionsResult] = await Promise.allSettled([
+        fetchTask(id),
+        fetchSessionsForTask(id),
+      ]);
+      setTask(taskResult.status === "fulfilled" ? taskResult.value : null);
+      setSessions(
+        sessionsResult.status === "fulfilled" ? sessionsResult.value : [],
+      );
+    } finally {
+      setLoading(false);
+    }
   }, [id]);
 
   useEffect(() => {

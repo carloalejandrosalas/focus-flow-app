@@ -16,6 +16,12 @@ import TaskForm from "../components/TaskForm";
 import { formatTime } from "../hooks/useTimer";
 import type { TaskStatus, Session } from "../types";
 
+const PRIORITY_COLORS = {
+  low: "text-emerald-400",
+  medium: "text-amber-400",
+  high: "text-rose-400",
+};
+
 const STATUS_OPTIONS: {
   value: TaskStatus;
   label: string;
@@ -87,7 +93,7 @@ export default function TaskDetailPage() {
       </Link>
 
       {/* Header */}
-      <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+      <div className="bg-slate-800 border border-slate-700 rounded-2xl p-4 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             <h1 className="text-xl font-bold break-words">{task.title}</h1>
@@ -130,9 +136,13 @@ export default function TaskDetailPage() {
             value={String(task.pomodorosCompleted)}
           />
           <Stat
-            icon={<span className="text-xs capitalize">{task.priority}</span>}
+            icon={
+              <span className={`text-xs ${PRIORITY_COLORS[task.priority]}`}>
+                ■
+              </span>
+            }
             label="Priority"
-            value=""
+            value={task.priority}
           />
         </div>
 
@@ -224,19 +234,21 @@ function SessionRow({ session }: { session: Session }) {
   });
 
   return (
-    <div className="flex items-center justify-between bg-slate-800 border border-slate-700 rounded-lg px-4 py-3">
-      <div className="flex items-center gap-3">
-        <span className={`text-xs font-medium capitalize ${methodColor}`}>
-          {session.method}
-        </span>
-        {session.phase && (
-          <span className="text-xs text-slate-500 capitalize">
-            {session.phase.replace("-", " ")}
+    <div className="flex items-center justify-between bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 gap-3">
+      <div className="flex flex-col gap-0.5 min-w-0">
+        <div className="flex items-center gap-2">
+          <span className={`text-xs font-medium capitalize ${methodColor}`}>
+            {session.method}
           </span>
-        )}
-        <span className="text-xs text-slate-600">{date}</span>
+          {session.phase && (
+            <span className="text-xs text-slate-500 capitalize">
+              {session.phase.replace("-", " ")}
+            </span>
+          )}
+        </div>
+        <span className="text-xs text-slate-500">{date}</span>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 shrink-0">
         <span className="text-xs font-mono text-slate-300">
           {formatTime(session.duration)}
         </span>
