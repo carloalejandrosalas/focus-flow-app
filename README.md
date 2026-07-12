@@ -1,47 +1,67 @@
-# FocusFlow
+# 🧠 FocusFlow
 
-A focus management web app built with React, TypeScript, Tailwind CSS, and Firebase Firestore. Helps you stay productive using the **Pomodoro** and **Flowtime** techniques while tracking tasks and time spent.
-
----
-
-## Features
-
-- **Pomodoro Timer** — 25-min focus blocks with 5-min short breaks and 15-min long breaks after every 4 pomodoros. Circular progress ring with phase indicators.
-- **Flowtime Timer** — Work in uninterrupted flow for as long as you need, then take a break proportional to your work time (recommended: 5 → 8 → 10 → 15 min).
-- **Method Selector** — Switch between Pomodoro and Flowtime at any time (disabled mid-session).
-- **Task Management** — Create tasks with a title, description, and priority (Low / Medium / High). Filter by status and search by name.
-- **Time Tracking** — Every timer session is recorded in Firestore with method, phase, duration, and completion status.
-- **Task Detail View** — See total time spent, pomodoros completed, status controls, and a full session history for each task.
-- **Dashboard** — Overview of total focus time, pomodoros done, tasks completed, and in-progress items.
+Stop doom-scrolling, start actually doing things. FocusFlow keeps you on track with **Pomodoro** and **Flowtime** timers, task management, and time logging — because your brain deserves better than 47 open browser tabs.
 
 ---
 
-## Tech Stack
+## ✨ What it does
 
-| Layer        | Technology                    |
-| ------------ | ----------------------------- |
-| UI framework | React 19 + TypeScript         |
-| Routing      | React Router v7               |
-| Styling      | Tailwind CSS v4 (Vite plugin) |
-| Icons        | Lucide React                  |
-| Backend / DB | Firebase Firestore            |
-| Bundler      | Vite 8 + Rolldown             |
-| Compiler     | React Compiler (babel preset) |
-| Linter       | Oxlint                        |
+### 🍅 Pomodoro Timer
+
+Classic 25-min focus blocks, 5-min breathers, and a well-earned 15-min long break after every 4 rounds. Comes with a circular progress ring so you can watch time melt away in style.
+
+### 🌊 Flowtime Timer
+
+For when you're _actually in the zone_ and a 25-minute cutoff feels criminal. Work as long as you're flowing, then take a break proportional to your effort. No arbitrary interruptions.
+
+### ⚡ Method Selector
+
+Flip between Pomodoro and Flowtime whenever you like — just not mid-session. We're focused here, not chaotic.
+
+### 📋 Task Management
+
+Create tasks with a title, description, and priority (Low / Medium / High). Search, filter by status, and stop pretending your mental to-do list is reliable.
+
+### ⏱️ Time Tracking
+
+Every session is logged to Firestore — method, phase, duration, the whole thing. No more "I think I worked like… 2 hours?" guessing games.
+
+### 🗂️ Task Detail View
+
+Dig into any task to see total time invested, pomodoros completed, full session history, and status controls. Evidence that you actually did the work.
+
+### 📊 Dashboard
+
+A quick snapshot of your day: total focus time, pomodoros crushed, tasks done, and what's still haunting you.
 
 ---
 
-## Getting Started
+## 🛠️ Tech Stack
 
-### 1. Install dependencies
+|                 |                               |
+| --------------- | ----------------------------- |
+| ⚛️ **UI**       | React 19 + TypeScript         |
+| 🧭 **Routing**  | React Router v7               |
+| 🎨 **Styling**  | Tailwind CSS v4 (Vite plugin) |
+| 🔥 **Backend**  | Firebase Firestore            |
+| 🖼️ **Icons**    | Lucide React                  |
+| ⚡ **Bundler**  | Vite 8 + Rolldown             |
+| 🧪 **Compiler** | React Compiler                |
+| 🔍 **Linter**   | Oxlint                        |
+
+---
+
+## 🚀 Getting Started
+
+### 1 · Install dependencies
 
 ```bash
 pnpm install
 ```
 
-### 2. Configure Firebase
+### 2 · Connect Firebase
 
-Copy the example env file and fill in your Firebase project credentials:
+Grab your credentials from the [Firebase Console](https://console.firebase.google.com) → Project Settings → Your apps, then:
 
 ```bash
 cp .env.example .env
@@ -56,17 +76,15 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 ```
 
-You can get these values from the [Firebase Console](https://console.firebase.google.com) → Project Settings → Your apps.
+> 💡 The `tasks` and `sessions` Firestore collections are created automatically on first write — nothing to set up manually.
 
-> Firestore collections (`tasks` and `sessions`) are created automatically on first write.
-
-### 3. Run the dev server
+### 3 · Run it
 
 ```bash
 pnpm dev
 ```
 
-### 4. Build for production
+### 4 · Ship it
 
 ```bash
 pnpm build
@@ -74,28 +92,32 @@ pnpm build
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
-  types/index.ts              — Shared TypeScript interfaces
-  lib/firebase.ts             — Firebase init + Firestore helpers
+  types/index.ts          → shared TypeScript interfaces
+  lib/firebase.ts         → Firebase init + Firestore helpers
   hooks/
-    useTasks.ts               — Task CRUD and loading state
-    useTimer.ts               — Pomodoro & Flowtime timer engine
+    useTasks.ts           → task CRUD + loading state
+    useTimer.ts           → Pomodoro & Flowtime timer engine
   components/
-    Layout.tsx                — App shell
-    Navbar.tsx                — Top navigation
-    MethodSelector.tsx        — Pomodoro / Flowtime toggle
-    PomodoroTimer.tsx         — Countdown timer component
-    FlowtimeTimer.tsx         — Stopwatch component
-    TaskCard.tsx              — Task list item
-    TaskForm.tsx              — Create / edit task modal
+    Layout.tsx            → app shell
+    Navbar.tsx            → top nav
+    MethodSelector.tsx    → 🍅 / 🌊 toggle
+    PomodoroTimer.tsx     → countdown ring
+    FlowtimeTimer.tsx     → stopwatch + break recommendation
+    TaskCard.tsx          → task list item
+    TaskForm.tsx          → create / edit task modal
   pages/
-    DashboardPage.tsx         — Stats and quick actions
-    TimerPage.tsx             — Timer + task selector
-    TasksPage.tsx             — Full task list with filters
-    TaskDetailPage.tsx        — Task info and session history
+    DashboardPage.tsx     → stats overview
+    TimerPage.tsx         → timer + task selector
+    TasksPage.tsx         → full task list with filters
+    TaskDetailPage.tsx    → task detail + session history
 ```
 
+---
+
 See [CHANGELOG.md](CHANGELOG.md) for release history.
+
+<!--  -->
