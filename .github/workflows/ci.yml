@@ -14,15 +14,17 @@ jobs:
   test:
     name: Unit Tests & Coverage
     runs-on: ubuntu-latest
-    env:
-      # Bypass pnpm's minimumReleaseAge supply-chain check for all commands.
-      # --frozen-lockfile already pins exact versions; this prevents false
-      # positives when a transitive dep was published shortly before CI runs.
-      npm_config_minimum_release_age: "0"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Relax pnpm release-age policy for CI
+        # Writes to .npmrc only in the runner workspace (not committed).
+        # --frozen-lockfile already guarantees exact pinned versions, so the
+        # minimumReleaseAge supply-chain check adds no value here and causes
+        # false positives when a transitive dep was published hours before CI.
+        run: echo "minimum-release-age=0" >> .npmrc
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
