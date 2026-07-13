@@ -19,13 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Relax pnpm release-age policy for CI
-        # Writes to .npmrc only in the runner workspace (not committed).
-        # --frozen-lockfile already guarantees exact pinned versions, so the
-        # minimumReleaseAge supply-chain check adds no value here and causes
-        # false positives when a transitive dep was published hours before CI.
-        run: echo "minimum-release-age=0" >> .npmrc
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
