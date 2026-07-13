@@ -1,3 +1,6 @@
 allowBuilds:
-  '@firebase/util': true
+  "@firebase/util": true
   protobufjs: true
+# Disable the minimumReleaseAge supply-chain check. The project relies on
+# --frozen-lockfile in CI (and lockfile review in PRs) for package integrity.
+minimumReleaseAge: 0
